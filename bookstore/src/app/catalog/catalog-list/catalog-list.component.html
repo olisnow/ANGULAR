@@ -1,0 +1,34 @@
+<table>
+  <thead>
+  <tr>
+    <th></th>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Prix</th>
+    <th>Note</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let book of books$ | async"
+      class="catalog-row">
+    <td class="catalog-image">
+      <a [routerLink]="routeMap.getBookLink(book)">
+        <img [src]="book.image">
+      </a>
+    </td>
+    <td class="catalog-title">
+      <a [routerLink]="routeMap.getBookLink(book)">{{book.title}}</a>
+    </td>
+    <td class="catalog-author">{{book.author}}</td>
+    <td class="catalog-price right">{{book.price | currency:'EUR':true}}</td>
+    <td class="catalog-rating">
+      <app-rating [(stars)]="book.rating"></app-rating>
+      <input type="number" [(ngModel)]="book.rating"></td>
+    <td class="catalog-buy-button">
+      <app-buy-button [book]="book"></app-buy-button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+

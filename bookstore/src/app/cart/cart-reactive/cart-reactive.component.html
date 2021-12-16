@@ -1,0 +1,62 @@
+<div class="debug"><pre>{{form.value | json}}</pre></div>
+
+<form [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      [class.submitted]="hadClassSubmitted()">
+  <fieldset formGroupName="identity">
+    <legend>Votre identité</legend>
+    <app-field label="Prénom">
+      <input type="text" formControlName="firstname">
+    </app-field>
+    <app-field label="Nom*">
+      <input type="text" formControlName="lastname">
+    </app-field>
+    <app-field label="Email">
+      <input type="text" formControlName="email">
+    </app-field>
+  </fieldset>
+  <fieldset formGroupName="shipping">
+    <legend>Adresse de livraison</legend>
+    <app-field label="Numéro et rue">
+      <input type="text" formControlName="street">
+    </app-field>
+    <app-field label="Code postal*">
+      <input type="text" formControlName="zipcode">
+    </app-field>
+    <app-field label="Ville*">
+      <input type="text" formControlName="city">
+    </app-field>
+    <app-field label="Pays">
+      <input type="text" formControlName="country">
+    </app-field>
+  </fieldset>
+  <p><label>
+    <input type="checkbox"
+           formControlName="sameAddress"
+           (change)="updateBilling()">
+    même adresse de facturation
+  </label></p>
+  <fieldset formGroupName="billing"
+            *ngIf="hasBillingAddress()">
+    <legend>Adresse de facturation</legend>
+    <app-field label="Numéro et rue">
+      <input type="text" formControlName="street">
+    </app-field>
+    <app-field label="Code postal*">
+      <input type="text" formControlName="zipcode">
+    </app-field>
+    <app-field label="Ville*">
+      <input type="text" formControlName="city">
+    </app-field>
+    <app-field label="Pays">
+      <input type="text" formControlName="country">
+    </app-field>
+  </fieldset>
+  <p>
+    <button type="submit"
+    [disabled]="isSubmitDisabled()">Envoyer</button>
+  </p>
+</form>
+
+
+

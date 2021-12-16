@@ -1,0 +1,46 @@
+<h2>Votre panier</h2>
+<table *ngIf="!cart.isEmpty() ; else empty">
+  <thead>
+  <tr>
+    <th></th>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Prix</th>
+    <th>Quantité</th>
+    <th>Montant</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of cart.rows" class="cart-row"
+      [@cartRows]="getCartRowState(row)">
+   <ng-container *ngIf="row.book as book">
+    <td class="cart-image"><img [src]="row.book.image"></td>
+    <td class="cart-title">{{book.title}}</td>
+    <td class="cart-author">{{book.author}}</td>
+    <td class="cart-price">{{book.price | currency:'EUR':true}}</td>
+    <td class="cart-quantity"><input type="number"
+               [(ngModel)]="row.quantity"></td>
+    <td class="cart-amount">{{cart.amount(row) | currency:'EUR':true}}</td>
+    <td class="cart-remove-button">
+      <button (click)="cart.removeRow(row)">
+        <img src="assets/img/cart-remove.png">
+      </button>
+    </td>
+   </ng-container>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td colspan="4"></td>
+    <td>TOTAL :</td>
+    <td>{{cart.total() | currency:'EUR':true}}</td>
+    <td></td>
+  </tr>
+  </tfoot>
+</table>
+<ng-template #empty>
+  <p>Le panier est vide</p>
+</ng-template>
+
+<app-order-button></app-order-button>
