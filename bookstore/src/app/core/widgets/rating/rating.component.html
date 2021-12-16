@@ -1,0 +1,8 @@
+
+<span *ngFor="let b of array; index as i"
+  ><span class="star" *ngIf="b"
+         (click)="changeRating(i + 1)">&#9733;</span
+  ><span class="star" *ngIf="!b"
+         (click)="changeRating(i + 1)">&#9734;</span
+></span>
+{{log()}}

@@ -1,0 +1,8 @@
+<img src="assets/img/cart-empty.png"
+     *ngIf="cart.isEmpty()">
+<img src="assets/img/cart-loaded.png"
+     *ngIf="!cart.isEmpty()">
+
+( {{cart.count()}} )
+
+{{cart.total() | currency:'EUR':true}}
